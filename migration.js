@@ -12,4 +12,22 @@ db.serialize(function() {
         '`biography` TEXT NOT NULL, ' +
         '`is_currently_employed` INTEGER NOT NULL DEFAULT 1, ' +
         'PRIMARY KEY(`id`) )' );
+
+    db.run('CREATE TABLE IF NOT EXISTS `Series` ( ' +
+        '`id` INTEGER NOT NULL, ' +
+        '`name` TEXT NOT NULL,' +
+        '`description` TEXT NOT NULL, ' +
+        'PRIMARY KEY(`id`)' );
+
+    
+    db.run('CREATE TABLE IF NOT EXISTS `Issue` ( ' +
+    '`id` INTEGER NOT NULL, ' +
+    '`name` TEXT NOT NULL,' +
+    '`issue_number` INTEGER NOT NULL, ' +
+    '`publication_date` TEXT NOT NULL, ' +
+    '`artist_id` TEXT NOT NULL, ' +
+    '`series_id` TEXT NOT NULL, ' +
+    'PRIMARY KEY(`id`), ' +
+    'FOREIGN KEY(`artist_id`) REFERENCES `Artist`(`id`), ' +
+    'FOREIGN KEY(`series_id`) REFERENCES `Series`(`id`) )');
 });
